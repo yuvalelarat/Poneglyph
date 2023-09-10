@@ -1,0 +1,22 @@
+{% extends "base2.html" %}
+{% block title %}Choose username{% endblock %}
+
+{% block content %}
+<form method="POST" action="/choose-username">
+    <h3 align="center">Hello {{session["name"]}}</h3>
+    <h5 align="center">This is your first time here, in order to continue please choose a unique username</h5>
+    <div class="form-floating mb-3">
+        <input 
+        type="text"
+        class="form-control"
+        id="userName"
+        name="userName"
+        placeholder="Enter Username"/>
+        <label for="userName">Username</label>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<br />
+{% endblock %}
+

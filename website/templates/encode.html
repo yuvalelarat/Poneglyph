@@ -1,0 +1,63 @@
+{% extends "base2.html" %}
+{% block title %}Encode{% endblock %}
+
+{% block content %}
+  <h1 class="text-center">Encode text inside a file</h1>
+  <div class="container">
+    <div class="row">
+      <h5>Select a file to upload</h5>
+      <h6>Allowed image types are - png, jpg, jpeg(more soon)</h6>
+      <form method="post" action="/encode" enctype="multipart/form-data">
+        <div class="form-group mb-3">
+          <input type="file" name="file" class="form-control-file" autocomplete="off" required>
+        </div>
+        <div class="form-group mb-3">
+          <label for="filename-input">Desired Filename:</label>
+          <input type="filename" id="filename-input" name="filename" class="form-control" placeholder="Enter desired filename">
+        </div>
+        <div class="form-group mb-3">
+          <img id="uploaded-image" src="#" alt="Uploaded Image" style="max-width: 300px; max-height: 300px; display: none;">
+        </div>
+        <div class="form-group mb-3">
+          <div class="input-group">
+            <textarea name="text" id="text-input" class="form-control" rows="5" placeholder="Enter text (up to 100 characters)" maxlength="100" required></textarea>
+            <div class="input-group-append">
+              <span class="input-group-text" id="character-count">100 characters remaining</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Submit" class="btn btn-primary mt-3">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <style>
+    .input-group-text {
+      background-color: #f8f9fa;
+      border: none;
+    }
+  </style>
+
+  <script>
+    const textInput = document.getElementById("text-input");
+    const characterCount = document.getElementById("character-count");
+    const uploadedImage = document.getElementById("uploaded-image"); // Get the <img> element
+
+    textInput.addEventListener("input", () => {
+      const remainingChars = 100 - textInput.value.length;
+      characterCount.textContent = remainingChars + " characters remaining";
+    });
+
+    const fileInput = document.querySelector('input[type="file"]');
+
+    fileInput.addEventListener("change", function() {
+      const file = fileInput.files[0];
+      if (file) {
+        uploadedImage.style.display = "block"; // Display the <img> element
+        uploadedImage.src = URL.createObjectURL(file); // Set the src attribute to the uploaded image
+      }
+    });
+  </script>
+{% endblock %}

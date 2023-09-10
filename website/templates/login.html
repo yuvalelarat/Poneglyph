@@ -1,0 +1,102 @@
+{% extends "base2.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <h3 align="center">Login</h3>
+    <div class="form-floating mb-3">
+        <input 
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="Enter email"
+        value="{{ entered_email or '' }}" />
+        <label for="email">Email Address</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input 
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="Enter password"/>
+        <label for="password">Password</label>
+    </div>
+    <div class="field">
+        <label class="checkbox">
+            <input type="checkbox" name="remember">
+            Remember me
+        </label>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+<br />
+
+<div align="center">
+    <a href="/auth/google" class="btn btn-google">
+        <img src="/static/images/google.png" alt="Google Logo" class="google-logo">
+        Continue with Google
+    </a>
+</div>
+<br />
+
+<p align="center">
+    Don't have an account? <a href="/sign-up">Sign Up</a>
+</p>
+
+<p align="center">
+    <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+</p>
+
+<div id="forgotPasswordForm" style="display:none;">
+    <form method="POST" action="/forgot-password">
+        <h3 align="center">Forgot Password</h3>
+        <div class="form-floating mb-3">
+            <input 
+            type="email"
+            class="form-control"
+            id="forgotPasswordEmail"
+            name="forgotPasswordEmail"
+            placeholder="Enter email"/>
+            <label for="forgotPasswordEmail">Enter your Email Address</label>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" id="cancelForgotPassword">Cancel</button>
+    </form>
+</div>
+
+<script>
+    const forgotPasswordLink = document.getElementById("forgotPasswordLink");
+    const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+    const cancelForgotPassword = document.getElementById("cancelForgotPassword");
+
+    forgotPasswordLink.addEventListener("click", function(event) {
+        event.preventDefault();
+        forgotPasswordForm.style.display = "block";
+    });
+
+    cancelForgotPassword.addEventListener("click", function(event) {
+        event.preventDefault();
+        forgotPasswordForm.style.display = "none";
+    });
+</script>
+
+
+<style>
+    .btn-google {
+    color: #000000;
+    background-color: #fff;
+    border-color: #cdcccc;
+}
+
+.btn-google:hover {
+    color: #000000;
+    background-color: #e5effe;
+    border-color: #cdcccc;
+}
+</style>
+{% endblock %}
+

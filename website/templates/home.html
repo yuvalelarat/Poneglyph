@@ -1,0 +1,36 @@
+{% extends "base2.html" %} {% block title %}Home{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to Poneglyph!</h1>
+    <p class="lead">Encrypt and hide messages in files with Steganography.</p>
+    <hr class="my-4">
+    <p class="text-muted">With this web app, you can hide secret messages inside an image using steganography techniques.</p>
+    <p class="text-muted">Encode your message to create a steganographic files or decode hidden messages from files.</p>
+    <a class="btn btn-primary btn-lg mt-1" href="/encode" role="button">Encode</a>
+    <a class="btn btn-primary btn-lg mt-1" href="/decode" role="button">Decode</a>
+    <div class="image-container">
+        <img class="image-container border border-dark p-0 mt-3" src="/static/images/SteganographyV2.jpg" alt="Steganography" class="img-fluid">
+      </div>
+  </div>
+</div>
+{% else %}
+<div class="container">
+    <div class="jumbotron text-center">
+      <h1 class="display-4">Welcome to Poneglyph!</h1>
+      <p class="lead">Encrypt and hide messages in files with Steganography.</p>
+      <hr class="my-4">
+      <p class="text-muted">With this web app, you can hide secret messages inside an image using steganography techniques.</p>
+      <p class="text-muted">Encode your message to create a steganographic files or decode hidden messages from files.</p>
+      <div class="cta-buttons">
+        <a class="btn btn-primary btn-lg mt-1" href="/login" role="button">Login</a>
+        <a class="btn btn-outline-primary btn-lg mt-1" href="/sign-up" role="button">Sign Up</a>
+      </div>
+      <div class="image-container">
+        <img class="image-container border border-dark p-0 mt-3" src="/static/images/SteganographyV2.jpg" alt="Steganography" class="img-fluid">
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

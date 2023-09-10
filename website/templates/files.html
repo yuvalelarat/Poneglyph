@@ -1,0 +1,126 @@
+{% extends "base2.html" %}
+{% block title %}My files{% endblock %}
+{% block content %}
+<h1 class="text-center">{{current_user.userName}} files</h1>
+<div class="card-deck">
+    {% if not files %}
+    <h5 class="text-center">You have no files.</h5>
+    {% else %}
+    {% for file in files %}
+    <div class="card custom-card mt-2 mb-2">
+        <div class="card-img-container">
+            <img src="data:image/png;base64,{{ file.data_base64 }}" class="card-img-top" style="max-width: 100%; max-height: 100%;">
+        </div>
+        <div class="card-footer-first">
+            <h3 class="card-title file-name"><u>File name:</u> {{ file.name }}</h3>
+            <button class="btn btn-dark view-text-button" data-toggle="collapse" data-target="#fileText{{ file.id }}">View Hidden Text</button>
+            <div id="fileText{{ file.id }}" class="collapse mt-2">
+                <h6 class="card-title">{{ file.text }}</h6>
+            </div>
+            <p class="card-title">Added on: {{ file.date }}</p>
+            {% if (file.sent_by == current_user.userName and current_user.userName == file.author) %}
+            <p class="card-title">you sent it to yourself</p>
+            <p class="card-title">Your own file</p>
+            {% elif file.sent_by and (current_user.userName == file.author) %}
+            <p class="card-title"><strong>sent by:</strong> {{ file.sent_by }}</p>
+            <p class="card-title">Your own file</p>
+            {% elif (file.sent_by == current_user.userName) %}
+            <p class="card-title">you sent it to yourself</p>
+            <p class="card-title"><strong>Original author:</strong> {{ file.author }}</p>
+            {% elif file.sent_by %}
+            <p class="card-title"><strong>sent by:</strong> {{ file.sent_by }}</p>
+            <p class="card-title"><strong>Original author:</strong> {{ file.author }}</p>
+            {% else %}
+            <p class="card-title">Your own file</p>
+            {% endif %}
+        </div>
+        <div class="card-footer-second mb-1">
+            <div class="row">
+                <div class="col-md-3 mb-2">
+                    <a href="{{ url_for('actions.download_file', file_id=file.id) }}" class="btn btn-primary">Download</a>
+                </div>
+                <div class="col-md-6">
+                    <form method="post" action="{{ url_for('actions.send_file', file_id=file.id) }}">
+                        <div class="input-group ">
+                            <input type="text" name="recipient_username" class="form-control" placeholder="Receiver Username">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-secondary">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <a href="{{ url_for('actions.delete_file', file_id=file.id) }}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+<style>
+    .custom-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: 100%; 
+    }
+
+    .card-img-container {
+        max-width: 200px;
+        max-height: auto;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-text-container {
+        padding: 1rem;
+        margin-top: 1rem; 
+        text-align: center;
+    }
+
+    .file-name {
+        margin-top: 0.5rem;
+    }
+
+    .card-footer-first {
+        background-color: white; 
+    }
+        /* Add styles for the View Text button */
+        .view-text-button {
+        background-color: #01848d;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .view-text-button:hover {
+        background-color: #2cbfc9;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const viewTextButtons = document.querySelectorAll(".view-text-button");
+
+        viewTextButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const targetId = button.getAttribute("data-target");
+                const targetCollapse = document.querySelector(targetId);
+                targetCollapse.classList.toggle("show");
+
+                if (targetCollapse.classList.contains("show")) {
+                    button.textContent = "Hide hidden text";
+                } else {
+                    button.textContent = "View hidden Text";
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

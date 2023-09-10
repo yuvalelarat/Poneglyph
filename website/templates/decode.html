@@ -1,0 +1,23 @@
+{% extends "base2.html" %}
+{% block title %}Decode{% endblock %}
+{% block content %}
+<h1 class="text-center">Decode text from a file</h1>
+<div class="container">
+  <div class="row">
+    <h5>Select a file to upload</h5>
+    <h6>***ONLY ORIGINAL FILES DOWNLOADED FROM THIS APP WILL WORK***</h6>
+    <form method="post" action="/decode" enctype="multipart/form-data">
+      <div class="form-group mb-3">
+        <input type="file" name="file" class="form-control-file" autocomplete="off" required>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Decode" class="btn btn-primary mt-3">
+      </div>
+    </form>
+  {% if decoded_text %}
+    <div class="mt-4">
+      <h2>Decoded Text:</h2>
+      <p>{{ decoded_text }}</p>
+    </div>
+  {% endif %}
+{% endblock %}
