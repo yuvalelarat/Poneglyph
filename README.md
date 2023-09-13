@@ -5,7 +5,7 @@ Website where you can hide text inside images and share it with others!
 
 
 ## More:
-In this website you can encrypt and decrypt using  text messages from images steganography and also send them to other users!
+In this website you can encrypt and decrypt text messages from images using steganography and also send them to other users!
 
 Complex user authentication system with Flask Mail AND option to login through Google accounts with OAuth2.0 (GCP).
 
