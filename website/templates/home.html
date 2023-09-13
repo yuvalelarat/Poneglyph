@@ -28,9 +28,19 @@
         <a class="btn btn-outline-primary btn-lg mt-1" href="/sign-up" role="button">Sign Up</a>
       </div>
       <div class="image-container">
-        <img class="image-container border border-dark p-0 mt-3" src="/static/images/SteganographyV2.jpg" alt="Steganography" class="img-fluid">
+        <img class="image-container border border-dark p-0 mt-3 img-fluid" src="/static/images/SteganographyV2.jpg" alt="Steganography" class="img-fluid">
       </div>
     </div>
   </div>
 {% endif %}
+
+<style>
+  @media (max-width: 576px) {
+    .image-container img {
+      max-width: 100%; 
+      height: auto; 
+    }
+  }
+</style>
+
 {% endblock %}
