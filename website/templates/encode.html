@@ -9,7 +9,7 @@
       <h6>Allowed image types are - png, jpg, jpeg(more soon)</h6>
       <form method="post" action="/encode" enctype="multipart/form-data">
         <div class="form-group mb-3">
-          <input type="file" name="file" class="form-control-file" autocomplete="off" required>
+          <input type="file" name="file" class="form-control-file" autocomplete="off" accept="image/*, video/*" capture="camera" required>
         </div>
         <div class="form-group mb-3">
           <label for="filename-input">Desired Filename:</label>
