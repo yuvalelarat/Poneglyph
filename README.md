@@ -10,3 +10,6 @@ In this website you can encode and decode text messages from images using stegan
 Complex user authentication system with Flask Mail AND option to login through Google accounts with OAuth2.0 (GCP).
 
 Hosted in AWS EC2, Link: ec2-13-51-200-73.eu-north-1.compute.amazonaws.com/
+
+
+https://github.com/yuvalelarat/Poneglyph/assets/102436759/2daebfa8-8a5b-41d4-b1dc-349b64aaa0bf
